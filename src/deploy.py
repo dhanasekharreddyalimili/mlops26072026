@@ -40,9 +40,9 @@ except Exception:
 
 # Create environment using requirements.txt
 env = Environment(
-    name="student-score-env",
+    name="student-score-env-v2",
     description="Inference environment",
-    image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04:latest",
+    image="mcr.microsoft.com/azureml/minimal-ubuntu22.04-py39-cpu-inference:latest"
     conda_file="conda.yml"
 )
 
@@ -52,7 +52,7 @@ ml_client.environments.create_or_update(env)
 deployment = ManagedOnlineDeployment(
     name="blue",
     endpoint_name=endpoint_name,
-    model="student-score-model:latest",
+    model="student-score-model:4",
     environment=env,
     code_configuration=CodeConfiguration(
         code="./src",
