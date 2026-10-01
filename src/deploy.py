@@ -10,9 +10,9 @@ from azure.ai.ml.entities import (
 import os
 
 # Workspace details
-subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-resource_group = os.environ["AZURE_RESOURCE_GROUP"]
-workspace_name = os.environ["AZURE_ML_WORKSPACE"]
+subscription_id = "dc9d863b-d56e-47ac-89f8-34fc54bf6875"
+resource_group = "ml-rg"
+workspace_name = "myazml20260909"
 
 credential = DefaultAzureCredential()
 
@@ -42,7 +42,7 @@ except Exception:
 env = Environment(
     name="student-score-env-v2",
     description="Inference environment",
-    image="mcr.microsoft.com/azureml/minimal-ubuntu22.04-py39-cpu-inference:latest"
+    image="mcr.microsoft.com/azureml/minimal-ubuntu22.04-py39-cpu-inference:latest",
     conda_file="conda.yml"
 )
 
