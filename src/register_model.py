@@ -1,5 +1,5 @@
 import os
-from azure.identity import DefaultAzureCredential
+from azure.identity import AzureCliCredential
 from azure.ai.ml import MLClient
 from azure.ai.ml.entities import Model
 
@@ -7,7 +7,17 @@ subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
 resource_group = os.environ["AZURE_RESOURCE_GROUP"]
 workspace_name = os.environ["AZURE_ML_WORKSPACE"]
 
-credential = DefaultAzureCredential()
+print("------------------------------------------")
+print("Azure ML Configuration")
+print("------------------------------------------")
+print(f"Subscription : {subscription_id}")
+print(f"Resource Group: {resource_group}")
+print(f"Workspace    : {workspace_name}")
+
+# Use the Azure CLI login performed by azure/login@v2
+credential = AzureCliCredential(
+    tenant_id="6e4c901f-782c-4423-b760-f74a5aeb5157"
+)
 
 ml_client = MLClient(
     credential=credential,
@@ -15,6 +25,10 @@ ml_client = MLClient(
     resource_group_name=resource_group,
     workspace_name=workspace_name,
 )
+
+print("------------------------------------------")
+print("Connected to Azure ML Workspace")
+print("------------------------------------------")
 
 model = Model(
     path="models/student_model.pkl",
